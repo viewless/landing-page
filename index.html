@@ -4,14 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Очаквайте скоро</title>
+
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Open Graph Meta for Sharing -->
+  <meta property="og:title" content="NIZ — Очаквайте скоро" />
+  <meta property="og:description" content="Брандът, който носи история и минимализъм. Абонирайте се, за да научите първи." />
+  <meta property="og:url" content="https://niz.bg" />
+  <!-- Optional preview image: <meta property="og:image" content="https://niz.bg/social-preview.jpg" /> -->
+
   <style>
     * { box-sizing: border-box; }
     body {
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f9f9f9;
+      background: linear-gradient(to bottom, #f9f9f9, #ececec);
       color: #333;
       display: flex;
       align-items: center;
@@ -19,24 +28,36 @@
       height: 100vh;
       text-align: center;
     }
+
     .container {
       max-width: 600px;
       padding: 20px;
     }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+    }
+
     h1 {
       font-size: 3rem;
       margin-bottom: 0.5rem;
     }
+
     p {
       font-size: 1.2rem;
       margin-bottom: 2rem;
       color: #666;
     }
+
     .email-input {
       display: flex;
       justify-content: center;
       margin-bottom: 1rem;
     }
+
     .email-input input {
       padding: 10px;
       font-size: 1rem;
@@ -45,6 +66,7 @@
       outline: none;
       width: 250px;
     }
+
     .email-input button {
       padding: 10px 15px;
       font-size: 1rem;
@@ -53,26 +75,55 @@
       color: white;
       border-radius: 0 4px 4px 0;
       cursor: pointer;
+      transition: background 0.2s ease;
     }
+
+    .email-input button:hover {
+      background: #333;
+    }
+
+    .socials {
+      display: flex;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+
     .socials a {
       margin: 0 10px;
       text-decoration: none;
       font-size: 1.8rem;
       color: #333;
     }
+
     .socials a:hover {
       color: #007bff;
     }
+
     .thanks-message {
-      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
       margin-top: 10px;
       color: green;
       font-weight: bold;
+    }
+
+    .thanks-message.visible {
+      opacity: 1;
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+      .email-input input {
+        width: 180px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
+    <!-- <div class="logo">NIZ</div> -->
     <h1>Очаквайте скоро 👋</h1>
     <p>Работим по нещо страхотно. Следете ни!</p>
 
@@ -85,13 +136,13 @@
     </form>
 
     <div class="thanks-message" id="thanksMessage">
-      ✅ Благодарим! Ще се чуем скоро.
+      ✅ Благодарим! Ще бъдеш сред първите, които ще разберат. 📨
     </div>
 
     <!-- Socials -->
     <div class="socials">
-      <a href="https://facebook.com/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-      <a href="https://instagram.com/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.facebook.com/profile.php?id=61575497751869/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+      <a href="https://www.instagram.com/wear.niz/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
     </div>
   </div>
 
@@ -115,7 +166,10 @@
       .then(response => {
         console.log("✅ Success:", response);
         form.reset();
-        thanksMessage.style.display = "block";
+        thanksMessage.classList.add("visible");
+        setTimeout(() => {
+          thanksMessage.classList.remove("visible");
+        }, 4000);
       })
       .catch(error => {
         console.error("❌ Error:", error);
