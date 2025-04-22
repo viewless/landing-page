@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Очаквайте скоро</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: #666;
+    }
+    .email-input {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .email-input input {
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px 0 0 4px;
+      outline: none;
+      width: 250px;
+    }
+    .email-input button {
+      padding: 10px 15px;
+      font-size: 1rem;
+      border: none;
+      background: #000;
+      color: white;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+    }
+    .socials a {
+      margin: 0 10px;
+      text-decoration: none;
+      font-size: 1.8rem;
+      color: #333;
+    }
+    .socials a:hover {
+      color: #007bff;
+    }
+    .thanks-message {
+      display: none;
+      margin-top: 10px;
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Очаквайте скоро 👋</h1>
+    <p>Работим по нещо страхотно. Следете ни!</p>
+
+    <!-- Email form -->
+    <form id="emailForm">
+      <div class="email-input">
+        <input name="email" id="emailInput" type="email" placeholder="Вашият имейл" required />
+        <button type="submit">Изпрати</button>
+      </div>
+    </form>
+
+    <div class="thanks-message" id="thanksMessage">
+      ✅ Благодарим! Ще се чуем скоро.
+    </div>
+
+    <!-- Socials -->
+    <div class="socials">
+      <a href="https://facebook.com/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+      <a href="https://instagram.com/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("emailForm");
+    const emailInput = document.getElementById("emailInput");
+    const thanksMessage = document.getElementById("thanksMessage");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const email = emailInput.value.trim();
+      if (!email) return;
+
+      fetch("https://script.google.com/macros/s/AKfycbyS73jXxHMwN2FDdMNPUITnIvNfhtWkF1rH4B6QNDqbf6PHtUvMPaKfz-NEpYJqhaf1/exec", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `email=${encodeURIComponent(email)}`
+      })
+      .then(res => res.text())
+      .then(response => {
+        console.log("✅ Success:", response);
+        form.reset();
+        thanksMessage.style.display = "block";
+      })
+      .catch(error => {
+        console.error("❌ Error:", error);
+      });
+    });
+  </script>
+</body>
+</html>
